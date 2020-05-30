@@ -12,8 +12,8 @@ const auth = require('./controllers/authorization');
 const db = knex({
   client: 'pg',
   connection: {
-  	connectionString : process.env.DATABASE_URL,
-  	ssl: true,
+    connectionString : process.env.POSTGRES_URI, //URL when deployed
+  	ssl: false, // true when deployed
   }
 });
 
