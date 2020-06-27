@@ -1,6 +1,6 @@
 const handleGigsGet = (req, res, db) => {
-	const { isgigcomplete } = req.params;
-	db.select('*').from('gigs').where({isgigcomplete})
+	const { isgigcomplete, gigassignedto } = req.params;
+	db.select('*').from('gigs').where({isgigcomplete, gigassignedto})
 		.then(gigs => {
 			if(gigs.length) {
 				res.json(gigs)

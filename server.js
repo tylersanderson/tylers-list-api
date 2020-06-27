@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex')
 
+const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const orders = require('./controllers/orders');
@@ -34,7 +35,7 @@ app.post('/orders/:ordernumber', auth.requireAuth, (req, res) => { orders.handle
 app.put('/orders/', (req, res) => { orders.handleOrderReset(req, res, db)})
 app.put('/image', auth.requireAuth, (req, res) => {image.handleImage(req, res, db)})
 app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res)})
-app.get('/gigs/:isgigcomplete', (req, res) => { gigs.handleGigsGet(req, res, db)})
+app.get('/gigs/:isgigcomplete/:gigassignedto', (req, res) => { gigs.handleGigsGet(req, res, db)})
 
 app.listen(process.env.PORT || 3000, ()=> {
 	console.log(`app is running on port ${process.env.PORT}`);
