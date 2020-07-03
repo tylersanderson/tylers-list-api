@@ -35,7 +35,8 @@ app.post('/orders/:ordernumber', auth.requireAuth, (req, res) => { orders.handle
 app.put('/orders/', (req, res) => { orders.handleOrderReset(req, res, db)})
 app.put('/image', auth.requireAuth, (req, res) => {image.handleImage(req, res, db)})
 app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res)})
-app.get('/gigs/:isgigcomplete/:gigassignedto', (req, res) => { gigs.handleGigsGet(req, res, db)})
+app.get('/gigs/:isgigcomplete/:gigassignedto', auth.requireAuth, (req, res) => { gigs.handleGigsGet(req, res, db)})
+app.get('/gigsunassigned', (req, res) => { gigs.handleUnassignedGigsGet(req, res, db)})
 
 app.listen(process.env.PORT || 3000, ()=> {
 	console.log(`app is running on port ${process.env.PORT}`);

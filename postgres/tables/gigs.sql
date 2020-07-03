@@ -10,6 +10,7 @@ CREATE TABLE gigs (
   zipcode VARCHAR(5), 
 	gignotes VARCHAR(500),
 	isgigcomplete boolean,
+  gigpostedby VARCHAR(10),
   gigassignedto VARCHAR(10),
   gigimage VARCHAR(500)
 );
