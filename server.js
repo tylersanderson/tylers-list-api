@@ -40,6 +40,7 @@ app.get('/gigs/:isgigcomplete/:gigassignedto', auth.requireAuth, (req, res) => {
 app.get('/gigsunassigned', (req, res) => { gigs.handleUnassignedGigsGet(req, res, db)})
 app.put('/gigs/gigreassign/:gignumber/:gigassignedto', (req, res) => { gigs.handleGigReassignUpdate(req, res, db)})
 app.put('/gigs/gigcomplete/:gignumber', (req, res) => { gigs.handleGigCompleteUpdate(req, res, db)})
+app.post('/gigs', auth.requireAuth, (req, res) => { gigs.handleGigPost(req, res, db)})
 
 app.listen(process.env.PORT || 3000, ()=> {
 	console.log(`app is running on port ${process.env.PORT}`);

@@ -57,9 +57,45 @@ const handleGigCompleteUpdate = (req, res, db) => {
 		.catch(err => res.status(400).json('error updating gig'))
 }
 
+const handleGigPost = (req, res, db) => {
+	const { gigname, gigpay, street, city, stateabv, zipcode, gignotes, gigimage, gigpostedby } = req.body;
+	const isgigcomplete = false;
+	const gigassignedto = '0'
+	if (!gigname || !gigpay || !street || !city || !stateabv || !zipcode || !gignotes || !gigpostedby) {
+		return res.status(400).json('incorrect form submission');
+	}
+	return	db.transaction(trx => {
+			trx.insert({
+				gigname,
+				gigpay,
+				street,
+				city,
+				stateabv,
+				zipcode,
+				gignotes,
+				gigimage,
+				gigpostedby,
+				isgigcomplete,
+				gigassignedto
+			})
+			.into('gigs')
+			.then(trx.commit)
+			.then(resp => {
+				if (resp) {
+					res.json("success")
+				} else {
+					res.status(400).json('Unable to post gig')
+				}
+			})
+			.catch(trx.rollback)
+		})
+		.catch(err => Promise.reject(400).json('unable to post gig'))
+}
+
 module.exports = {
   handleGigsGet,
   handleUnassignedGigsGet,
   handleGigReassignUpdate,
-  handleGigCompleteUpdate
+	handleGigCompleteUpdate,
+	handleGigPost
 }
