@@ -12,8 +12,8 @@ const handleGigsGet = (req, res, db) => {
 }
 
 const handleGigsPostedByGet = (req, res, db) => {
-	const { isgigcomplete, gigpostedby } = req.params;
-	db.select('*').from('gigs').where({isgigcomplete, gigpostedby})
+	const { gigpostedby } = req.params;
+	db.select('*').from('gigs').where({gigpostedby})
 		.then(gigs => {
 			if(gigs.length) {
 				res.json(gigs)
