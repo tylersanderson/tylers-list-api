@@ -9,7 +9,7 @@ services:
     command: npm start
     working_dir: /usr/src/tylers-list-api
     environment:
-      POSTGRES_URI: postgres://sally:secret@postgres:5432/tylers-list-docker
+      POSTGRES_URI: postgres://tyler:secret@postgres:5432/tylers-list-docker
       REDIS_URI: redis://redis:6379
       JWTSIGN: JWTSIGNATURE
     links:
@@ -23,7 +23,7 @@ services:
   # Postgres
   postgres:
     environment:
-      POSTGRES_USER: sally
+      POSTGRES_USER: tyler
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: tylers-list-docker
       POSTGRES_HOST: postgres
