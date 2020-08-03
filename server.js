@@ -13,8 +13,8 @@ const gigs = require('./controllers/gigs');
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString : process.env.POSTGRES_URI, //URL when deployed, URI in dev
-  	ssl: false, // true when deployed, false in dev
+    connectionString : process.env.POSTGRES_URL, //URL when deployed, URI in dev
+  	ssl: true, // true when deployed, false in dev
   }
 });
 
