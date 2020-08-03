@@ -2,7 +2,15 @@ const jwt = require('jsonwebtoken');
 const redis = require('redis');
 
 //setup Redis:
-const redisClient = redis.createClient(process.env.REDIS_URL); //process.env.REDIS_URL in production, URI in dev
+//const redisClient = redis.createClient(process.env.REDIS_URL); //process.env.REDIS_URL in production, URI in dev
+const redis = require("redis").createClient();
+if (process.env.REDISTOGO_URL) {
+	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+	var redis = require("redis").createClient(rtg.port, rtg.hostname);
+	redis.auth(rtg.auth.split(":")[1]);
+} else {
+	var redis = require("redis").createClient();
+}
 
 const handleSignin = (db, bcrypt, req, res) => {
 	const { email, password } = req.body;
