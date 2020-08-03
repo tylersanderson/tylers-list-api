@@ -75,7 +75,7 @@ const signinAuthentication = (db, bcrypt) => (req, res) => {
 
 module.exports = {
 	signinAuthentication: signinAuthentication,
-	redis: redisClient,
+	redisClient: redis,
 	signToken: signToken,
 	setToken: setToken,
 	createSessions: createSessions
