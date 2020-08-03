@@ -7,15 +7,14 @@ const knex = require('knex')
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
-const orders = require('./controllers/orders');
 const auth = require('./controllers/authorization');
 const gigs = require('./controllers/gigs');
 
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString : process.env.POSTGRES_URI, //URL when deployed
-  	ssl: false, // true when deployed
+    connectionString : process.env.POSTGRES_URI, //URL when deployed, URI in dev
+  	ssl: false, // true when deployed, false in dev
   }
 });
 
@@ -41,13 +40,3 @@ app.post('/gigs', auth.requireAuth, (req, res) => { gigs.handleGigPost(req, res,
 app.listen(process.env.PORT || 3000, ()=> {
 	console.log(`app is running on port ${process.env.PORT}`);
 })
-
-
-/*
-/ --> res = this is working
-/signin --> POST  success/fail
-/register --> POST = user
-/profile/:userId -->  GET = user
-/image --> PUT --> user
-
-*/
