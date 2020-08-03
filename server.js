@@ -13,8 +13,10 @@ const gigs = require('./controllers/gigs');
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL, //DATABASE_URL when deployed, POSTGRES_URI in dev
-  	ssl: true
+    connectionString : process.env.DATABASE_URL, //DATABASE_URL when deployed, POSTGRES_URI in dev
+  	ssl: {
+      rejectUnauthorized: false
+    } // true when deployed, false in dev
   }
 });
 
