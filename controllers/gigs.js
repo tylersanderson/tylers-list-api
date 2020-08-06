@@ -70,6 +70,21 @@ const handleGigCompleteUpdate = (req, res, db) => {
 		.catch(err => res.status(400).json('error updating gig'))
 }
 
+const handleGigsReset = (req, res, db) => {
+	const isgigcomplete = false;
+	const gigassignedto = 0
+	db('gigs')
+		.update({ isgigcomplete, gigassignedto })
+		.then(resp => {
+			if (resp) {
+				res.json("success")
+			} else {
+				res.status(400).json('Unable to update')
+			}
+		})
+		.catch(err => res.status(400).json('error updating gig'))
+}
+
 const handleGigPost = (req, res, db) => {
 	const { gigname, gigpay, street, city, stateabv, zipcode, gignotes, gigimage, gigpostedby } = req.body;
 	const isgigcomplete = false;
@@ -111,5 +126,6 @@ module.exports = {
   handleUnassignedGigsGet,
   handleGigReassignUpdate,
 	handleGigCompleteUpdate,
+	handleGigsReset,
 	handleGigPost
 }

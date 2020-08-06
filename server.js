@@ -37,6 +37,7 @@ app.get('/gigs/all/postedby/:gigpostedby', auth.requireAuth, (req, res) => { gig
 app.get('/gigsunassigned', (req, res) => { gigs.handleUnassignedGigsGet(req, res, db)})
 app.put('/gigs/gigreassign/:gignumber/:gigassignedto', auth.requireAuth, (req, res) => { gigs.handleGigReassignUpdate(req, res, db)})
 app.put('/gigs/gigcomplete/:gignumber', auth.requireAuth, (req, res) => { gigs.handleGigCompleteUpdate(req, res, db)})
+app.put('/gigs/gigsreset/gigsreset/gigsreset', auth.requireAuth, (req, res) => { gigs.handleGigsReset(req, res, db)})
 app.post('/gigs', auth.requireAuth, (req, res) => { gigs.handleGigPost(req, res, db)})
 
 app.listen(process.env.PORT || 3000, ()=> {
